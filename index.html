@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مارال جبل - منتجات أصلية 100%</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background-color: #2c5e1a;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .guarantee {
+            background-color: #e8f4e3;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-right: 4px solid #2c5e1a;
+            font-weight: bold;
+        }
+        
+        .price {
+            background-color: #2c5e1a;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        
+        .product-selection {
+            margin: 20px 0;
+        }
+        
+        .product-selection h2 {
+            color: #2c5e1a;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .product-option {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-option:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .product-option.selected {
+            background-color: #e8f4e3;
+            border-color: #2c5e1a;
+        }
+        
+        .product-name {
+            font-weight: bold;
+            color: #2c5e1a;
+        }
+        
+        .product-price {
+            float: left;
+            font-weight: bold;
+            color: #d35400;
+        }
+        
+        .submit-btn {
+            background-color: #2c5e1a;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #1e3f12;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>مارال جبل - منتجات أصلية 100%</h1>
+        </div>
+        
+        <div class="content">
+            <div class="guarantee">
+                بالتأكيد منتجاتنا اصلية 100% و مضمونة النتائج و امنة المستخدم.
+            </div>
+            
+            <div class="price">
+                السعر 99 شيكل
+            </div>
+            
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="name">الاسم</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="whatsapp">رقم واتس اب للتواصل</label>
+                    <input type="tel" id="whatsapp" name="whatsapp">
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">المحافظة / المقاطعة / المدينة</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">العنوان بالتفصيل</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                
+                <div class="product-selection">
+                    <h2>*المنتج المطلوب*</h2>
+                    
+                    <div class="product-option" data-price="99.00">
+                        <div class="product-name">عبوة واحدة من مارال جبل</div>
+                        <div class="product-price">99.00 شيكل</div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    
+                    <div class="product-option" data-price="149.00">
+                        <div class="product-name">عبوتين مارال جبل</div>
+                        <div class="product-price">149.00 شيكل</div>
+                        <div style="clear: both;"></div>
+                    </div>
+                    
+                    <div class="product-option" data-price="169.00">
+                        <div class="product-name">ثلاث عبوات من مارال جبل</div>
+                        <div class="product-price">169.00 شيكل</div>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+                
+                <input type="hidden" id="selected-product" name="selected-product" value="">
+                <input type="hidden" id="selected-price" name="selected-price" value="">
+                
+                <button type="submit" class="submit-btn">تسجيل طلب الشراء</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productOptions = document.querySelectorAll('.product-option');
+            const selectedProductInput = document.getElementById('selected-product');
+            const selectedPriceInput = document.getElementById('selected-price');
+            const priceDisplay = document.querySelector('.price');
+            
+            // تحديد الخيار الأول افتراضيًا
+            if (productOptions.length > 0) {
+                productOptions[0].classList.add('selected');
+                const productName = productOptions[0].querySelector('.product-name').textContent;
+                const productPrice = productOptions[0].getAttribute('data-price');
+                
+                selectedProductInput.value = productName;
+                selectedPriceInput.value = productPrice;
+                priceDisplay.textContent = `السعر ${productPrice} شيكل`;
+            }
+            
+            // إضافة حدث النقر لخيارات المنتج
+            productOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // إزالة التحديد من جميع الخيارات
+                    productOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // إضافة التحديد للخيار المختار
+                    this.classList.add('selected');
+                    
+                    // تحديث القيم المخفية
+                    const productName = this.querySelector('.product-name').textContent;
+                    const productPrice = this.getAttribute('data-price');
+                    
+                    selectedProductInput.value = productName;
+                    selectedPriceInput.value = productPrice;
+                    priceDisplay.textContent = `السعر ${productPrice} شيكل`;
+                });
+            });
+            
+            // معالجة إرسال النموذج
+            document.getElementById('order-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // هنا يمكنك إضافة كود لإرسال البيانات إلى الخادم
+                alert('تم تسجيل طلبك بنجاح! سنتصل بك قريبًا.');
+                
+                // إعادة تعيين النموذج
+                this.reset();
+                
+                // إعادة تعيين اختيار المنتج إلى الافتراضي
+                productOptions.forEach(opt => opt.classList.remove('selected'));
+                if (productOptions.length > 0) {
+                    productOptions[0].classList.add('selected');
+                    const productName = productOptions[0].querySelector('.product-name').textContent;
+                    const productPrice = productOptions[0].getAttribute('data-price');
+                    
+                    selectedProductInput.value = productName;
+                    selectedPriceInput.value = productPrice;
+                    priceDisplay.textContent = `السعر ${productPrice} شيكل`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
