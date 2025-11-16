@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاختبارات - MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #4285f4;
+            --medical-blue: #1e88e5;
+            --medical-green: #43a047;
+            --medical-teal: #00acc1;
+            --dark: #2c387e;
+            --light: #f8fdff;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #e3f2fd;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--medical-teal), #006064);
+            padding: 30px 25px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .content {
+            padding: 30px;
+            background: var(--light);
+        }
+        
+        .quiz-container {
+            display: none;
+        }
+        
+        .start-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .start-btn {
+            background: linear-gradient(135deg, var(--medical-teal), #006064);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .question-counter {
+            font-size: 1rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            border-color: var(--medical-teal);
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: var(--medical-blue);
+        }
+        
+        .option.correct {
+            background: #e8f5e9;
+            border-color: var(--medical-green);
+        }
+        
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .lifelines {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .lifeline {
+            background: var(--medical-blue);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .lifeline:disabled {
+            background: #b0bec5;
+            cursor: not-allowed;
+        }
+        
+        .lifeline:hover:not(:disabled) {
+            background: #1565c0;
+        }
+        
+        .next-btn {
+            background: linear-gradient(135deg, var(--medical-teal), #006064);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .next-btn:hover {
+            background: linear-gradient(135deg, #0097a7, #004d40);
+        }
+        
+        .results {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--medical-teal);
+            margin: 20px 0;
+        }
+        
+        .restart-btn {
+            background: linear-gradient(135deg, var(--medical-teal), #006064);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .restart-btn:hover {
+            background: linear-gradient(135deg, #0097a7, #004d40);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c387e, #1a237e);
+            padding: 20px 30px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .year {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 20px;
+            }
+            
+            .header {
+                padding: 25px 20px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <h1 class="title">الاختبارات</h1>
+            <p class="subtitle">Water Bath - أسئلة وتقييم</p>
+        </header>
+        
+        <main class="content">
+            <div class="start-screen" id="start-screen">
+                <h2>اختبار الحمام المائي</h2>
+                <p>سيتم اختبار معرفتك بجهاز الحمام المائي من خلال 15 سؤالاً</p>
+                <p>لديك 4 مساعدات متاحة:</p>
+                <ul style="text-align: right; margin: 15px 0; list-style: none;">
+                    <li><i class="fas fa-phone" style="color: var(--medical-blue);"></i> اتصال بصديق</li>
+                    <li><i class="fas fa-users" style="color: var(--medical-blue);"></i> سؤال الجمهور</li>
+                    <li><i class="fas fa-times-circle" style="color: var(--medical-blue);"></i> حذف إجابتين</li>
+                    <li><i class="fas fa-sync-alt" style="color: var(--medical-blue);"></i> تغيير السؤال</li>
+                </ul>
+                <button class="start-btn" onclick="startQuiz()">بدء الاختبار</button>
+            </div>
+            
+            <div class="quiz-container" id="quiz-container">
+                <div class="question-counter" id="question-counter">السؤال 1 من 15</div>
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                
+                <div class="lifelines">
+                    <button class="lifeline" id="call-friend" onclick="useLifeline('callFriend')">
+                        <i class="fas fa-phone"></i> اتصال
+                    </button>
+                    <button class="lifeline" id="ask-audience" onclick="useLifeline('askAudience')">
+                        <i class="fas fa-users"></i> الجمهور
+                    </button>
+                    <button class="lifeline" id="fifty-fifty" onclick="useLifeline('fiftyFifty')">
+                        <i class="fas fa-times-circle"></i> 50/50
+                    </button>
+                    <button class="lifeline" id="change-question" onclick="useLifeline('changeQuestion')">
+                        <i class="fas fa-sync-alt"></i> تغيير
+                    </button>
+                </div>
+                
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()" disabled>التالي</button>
+            </div>
+            
+            <div class="results" id="results">
+                <h2>نتيجة الاختبار</h2>
+                <div class="score" id="score">0/15</div>
+                <p id="result-message"></p>
+                <button class="restart-btn" onclick="restartQuiz()">إعادة الاختبار</button>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="copyright">جميع الحقوق محفوظة لدى MedBuild3D</div>
+            <div class="year">© 2026</div>
+        </footer>
+    </div>
+
+    <script>
+        // أسئلة الاختبار
+        const questions = [
+            {
+                question: "ما هو الغرض الأساسي من الحمّام المائي في التطبيقات الطبية؟",
+                options: [
+                    "تبريد العينات",
+                    "توفير بيئة تسخين مستقرة",
+                    "تعقيم المعدات",
+                    "خلط المواد الكيميائية"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما هو نطاق درجة الحرارة النموذجي للحمّام المائي؟",
+                options: [
+                    "0°C إلى 50°C",
+                    "30°C إلى 100°C",
+                    "50°C إلى 150°C",
+                    "100°C إلى 200°C"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما هو السائل الذي يستخدم بشكل أساسي في الحمّام المائي؟",
+                options: [
+                    "الزيت",
+                    "الكحول",
+                    "الماء",
+                    "الزئبق"
+                ],
+                correct: 2
+            },
+            {
+                question: "ما هو المكون الذي يتحكم في درجة الحرارة في الحمّام المائي؟",
+                options: [
+                    "مقياس الحرارة (الترمومتر)",
+                    "السخان",
+                    "المنظم الحراري (الترموستات)",
+                    "المؤقت (التايمر)"
+                ],
+                correct: 2
+            },
+            {
+                question: "ما هو التطبيق الشائع للحمّام المائي؟",
+                options: [
+                    "طرد العينات مركزيًا (Centrifuging samples)",
+                    "تسخين العينات بلطف",
+                    "خلط المحاليل",
+                    "قياس الأس الهيدروجيني (pH)"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما الذي يجب إضافته إلى الحمّام المائي لمنع نمو الميكروبات؟",
+                options: [
+                    "الكحول",
+                    "المنظفات",
+                    "عامل مضاد للفطريات",
+                    "الملح"
+                ],
+                correct: 2
+            },
+            {
+                question: "أي جزء من الحمّام المائي يمنع ارتفاع درجة الحرارة؟",
+                options: [
+                    "المنصهر (الفيوز)",
+                    "لوحة التحكم",
+                    "المنظم الحراري (الترموستات)",
+                    "مستشعر مستوى الماء"
+                ],
+                correct: 2
+            },
+            {
+                question: "ماذا يحدث إذا كان مستوى الماء في الحمّام منخفضًا جدًا؟",
+                options: [
+                    "تزداد درجة الحرارة",
+                    "قد يتضرر السخان",
+                    "يتوقف المنظم الحراري عن العمل",
+                    "يتبخر الماء"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما هي وظيفة المؤقت (Timer) في الحمّام المائي؟",
+                options: [
+                    "تنظيم تدفق الماء",
+                    "تحديد مدة التسخين",
+                    "قياس درجة الحرارة",
+                    "خلط العينات"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما هو نوع الماء الموصى باستخدامه في الحمّام المائي؟",
+                options: [
+                    "ماء الصنبور",
+                    "الماء المقطر",
+                    "الماء المالح",
+                    "المياه المعدنية"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما هي الميزة الرئيسية لاستخدام الحمّام المائي بدلاً من التسخين المباشر؟",
+                options: [
+                    "يسخن بشكل أسرع",
+                    "يوفر تسخينًا موحدًا (متجانسًا)",
+                    "يستهلك طاقة أقل",
+                    "أسهل في الصيانة"
+                ],
+                correct: 1
+            },
+            {
+                question: "كيف يتم ضمان استقرار درجة الحرارة في الحمّام المائي؟",
+                options: [
+                    "باستخدام سخان عالي الطاقة",
+                    "بالحفاظ على مستوى ثابت للماء",
+                    "باستخدام حجرة معزولة",
+                    "عن طريق معايرة المنظم الحراري بانتظام"
+                ],
+                correct: 2
+            },
+            {
+                question: "ما هي الميزة التي تميز الحمّام المائي الاهتزازي (shaking water bath) عن الحمّام المائي العادي؟",
+                options: [
+                    "القدرة على الحفاظ على درجة حرارة أعلى",
+                    "القدرة على تدوير الماء",
+                    "القدرة على تحريك العينات (رجّها)",
+                    "القدرة على قياس الأس الهيدروجيني (pH)"
+                ],
+                correct: 2
+            },
+            {
+                question: "لماذا يُفضل الماء المقطر في الحمّام المائي؟",
+                options: [
+                    "لديه نقطة غليان أعلى",
+                    "يقلل من تكون القشور/الترسبات",
+                    "يسخن أسرع من ماء الصنبور",
+                    "يبرد العينات بفعالية"
+                ],
+                correct: 1
+            },
+            {
+                question: "ما هي ميزة الأمان المدرجة في الحمّامات المائية الحديثة؟",
+                options: [
+                    "الإيقاف التلقائي في حالة ارتفاع درجة الحرارة",
+                    "مقياس الضغط العالي",
+                    "مستشعر الأس الهيدروجيني (pH)",
+                    "جهاز مراقبة التوصيل الكهربائي"
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let lifelinesUsed = {
+            callFriend: false,
+            askAudience: false,
+            fiftyFifty: false,
+            changeQuestion: false
+        };
+
+        function startQuiz() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question-counter').textContent = `السؤال ${currentQuestion + 1} من ${questions.length}`;
+            document.getElementById('question').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.dataset.index = index;
+                optionElement.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            document.getElementById('next-btn').disabled = true;
+            selectedOption = null;
+            
+            // إعادة تمكين المساعدات إذا لم تستخدم
+            updateLifelines();
+        }
+
+        function selectOption(index) {
+            if (selectedOption !== null) return;
+            
+            selectedOption = index;
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[index].classList.add('selected');
+            
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            // التحقق من الإجابة
+            const question = questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            
+            if (selectedOption === question.correct) {
+                options[selectedOption].classList.add('correct');
+                score++;
+            } else {
+                options[selectedOption].classList.add('incorrect');
+                options[question.correct].classList.add('correct');
+            }
+            
+            // الانتقال للسؤال التالي بعد تأخير
+            setTimeout(() => {
+                currentQuestion++;
+                
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1500);
+        }
+
+        function useLifeline(type) {
+            if (lifelinesUsed[type]) return;
+            
+            const question = questions[currentQuestion];
+            
+            switch(type) {
+                case 'callFriend':
+                    // اتصال بصديق - إظهار الإجابة الأكثر توقعاً
+                    alert(`صديقك يعتقد أن الإجابة الصحيحة هي: ${question.options[question.correct]}`);
+                    lifelinesUsed.callFriend = true;
+                    document.getElementById('call-friend').disabled = true;
+                    break;
+                    
+                case 'askAudience':
+                    // سؤال الجمهور - إظهار نتائج افتراضية
+                    const percentages = [10, 20, 50, 20];
+                    percentages[question.correct] = 70;
+                    
+                    let audienceResult = "نتيجة تصويت الجمهور:\n";
+                    question.options.forEach((option, index) => {
+                        audienceResult += `${option}: ${percentages[index]}%\n`;
+                    });
+                    
+                    alert(audienceResult);
+                    lifelinesUsed.askAudience = true;
+                    document.getElementById('ask-audience').disabled = true;
+                    break;
+                    
+                case 'fiftyFifty':
+                    // 50/50 - حذف إجابتين خاطئتين
+                    const options = document.querySelectorAll('.option');
+                    let wrongOptions = [];
+                    
+                    question.options.forEach((option, index) => {
+                        if (index !== question.correct) {
+                            wrongOptions.push(index);
+                        }
+                    });
+                    
+                    // حذف إجابتين عشوائياً من الإجابات الخاطئة
+                    const removedOptions = [];
+                    while (removedOptions.length < 2 && wrongOptions.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * wrongOptions.length);
+                        removedOptions.push(wrongOptions[randomIndex]);
+                        wrongOptions.splice(randomIndex, 1);
+                    }
+                    
+                    removedOptions.forEach(index => {
+                        options[index].style.display = 'none';
+                    });
+                    
+                    lifelinesUsed.fiftyFifty = true;
+                    document.getElementById('fifty-fifty').disabled = true;
+                    break;
+                    
+                case 'changeQuestion':
+                    // تغيير السؤال
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        showQuestion();
+                    } else {
+                        alert("لا يمكن تغيير السؤال الأخير");
+                        return;
+                    }
+                    
+                    lifelinesUsed.changeQuestion = true;
+                    document.getElementById('change-question').disabled = true;
+                    break;
+            }
+        }
+
+        function updateLifelines() {
+            // تحديث حالة المساعدات
+            document.getElementById('call-friend').disabled = lifelinesUsed.callFriend;
+            document.getElementById('ask-audience').disabled = lifelinesUsed.askAudience;
+            document.getElementById('fifty-fifty').disabled = lifelinesUsed.fiftyFifty;
+            document.getElementById('change-question').disabled = lifelinesUsed.changeQuestion;
+        }
+
+        function showResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            
+            document.getElementById('score').textContent = `${score}/${questions.length}`;
+            
+            let message = "";
+            if (score >= 13) {
+                message = "ممتاز! لديك معرفة ممتازة بجهاز الحمام المائي";
+            } else if (score >= 10) {
+                message = "جيد جداً! لديك معرفة جيدة بجهاز الحمام المائي";
+            } else if (score >= 7) {
+                message = "مقبول! تحتاج إلى مراجعة بعض المعلومات";
+            } else {
+                message = "ضعيف! ننصحك بمراجعة الشرح النظري للجهاز";
+            }
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            selectedOption = null;
+            lifelinesUsed = {
+                callFriend: false,
+                askAudience: false,
+                fiftyFifty: false,
+                changeQuestion: false
+            };
+            
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

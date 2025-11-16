@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات - MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #4285f4;
+            --medical-blue: #1e88e5;
+            --medical-green: #43a047;
+            --medical-teal: #00acc1;
+            --dark: #2c387e;
+            --light: #f8fdff;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .settings-container {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #e3f2fd;
+        }
+        
+        .settings-header {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            padding: 30px 25px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .settings-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .settings-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .settings-content {
+            padding: 0;
+        }
+        
+        .settings-section {
+            padding: 25px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--medical-blue);
+            font-size: 1.2rem;
+        }
+        
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f8fafc;
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-item:hover {
+            background: #f8fafc;
+            margin: 0 -15px;
+            padding: 18px 15px;
+            border-radius: 10px;
+        }
+        
+        .item-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 1.2rem;
+            color: var(--medical-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .settings-item:hover .item-icon {
+            background: var(--medical-blue);
+            color: white;
+        }
+        
+        .item-content {
+            flex: 1;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 3px;
+            font-size: 1rem;
+        }
+        
+        .item-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        
+        .item-arrow {
+            color: #cbd5e1;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .settings-item:hover .item-arrow {
+            color: var(--medical-blue);
+            transform: translateX(-5px);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--medical-blue);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+        
+        .account-info {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .user-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .payment-content {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+        
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .payment-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #64748b;
+            cursor: pointer;
+        }
+        
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .form-input {
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--medical-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .pay-btn {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .pay-btn:hover {
+            background: linear-gradient(135deg, #1565c0, #0097a7);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c387e, #1a237e);
+            padding: 20px 30px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .year {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 480px) {
+            .settings-container {
+                border-radius: 20px;
+            }
+            
+            .settings-header {
+                padding: 25px 20px;
+            }
+            
+            .settings-title {
+                font-size: 1.8rem;
+            }
+            
+            .settings-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <header class="settings-header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <h1 class="settings-title">الإعدادات</h1>
+            <p class="settings-subtitle">تخصيص التطبيق وتحديث البيانات</p>
+        </header>
+        
+        <main class="settings-content">
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i>
+                    الحساب
+                </h2>
+                
+                <div class="account-info">
+                    <div class="user-name" id="user-name">زائر</div>
+                    <div class="user-email" id="user-email">غير مسجل دخول</div>
+                </div>
+                
+                <div class="settings-item" onclick="handleSubscription()">
+                    <div class="item-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">تسجيل الدخول / الاشتراك</div>
+                        <div class="item-desc">إنشاء حساب أو تسجيل الدخول</div>
+                    </div>
+                    <div class="item-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <div class="settings-item" onclick="handleLogout()">
+                    <div class="item-icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">تسجيل الخروج</div>
+                        <div class="item-desc">إنهاء الجلسة الحالية</div>
+                    </div>
+                    <div class="item-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-cog"></i>
+                    التفضيلات
+                </h2>
+                
+                <div class="settings-item">
+                    <div class="item-icon">
+                        <i class="fas fa-volume-up"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">الصوت والموسيقى</div>
+                        <div class="item-desc">تشغيل أو إيقاف صوت التطبيق</div>
+                    </div>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="soundToggle" onchange="toggleSound()">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+                
+                <div class="settings-item">
+                    <div class="item-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">الإشعارات</div>
+                        <div class="item-desc">إشعارات التحديثات والاختبارات</div>
+                    </div>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="notificationsToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+                
+                <div class="settings-item">
+                    <div class="item-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">الوضع الليلي</div>
+                        <div class="item-desc">تفعيل الوضع المظلم</div>
+                    </div>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-credit-card"></i>
+                    الاشتراكات والدفع
+                </h2>
+                
+                <div class="settings-item" onclick="openPaymentModal()">
+                    <div class="item-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">الترقية للإصدار المميز</div>
+                        <div class="item-desc">الوصول لجميع الميزات المتقدمة</div>
+                    </div>
+                    <div class="item-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <div class="settings-item">
+                    <div class="item-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">سجل المدفوعات</div>
+                        <div class="item-desc">عرض جميع المعاملات السابقة</div>
+                    </div>
+                    <div class="item-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    معلومات التطبيق
+                </h2>
+                
+                <div class="settings-item" onclick="contactSupport()">
+                    <div class="item-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">الدعم الفني</div>
+                        <div class="item-desc">+9647734054850</div>
+                    </div>
+                    <div class="item-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <div class="settings-item" onclick="showAbout()">
+                    <div class="item-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">عن التطبيق</div>
+                        <div class="item-desc">إصدار 1.0 | MedBuild3D</div>
+                    </div>
+                    <div class="item-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <div class="settings-item">
+                    <div class="item-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="item-content">
+                        <div class="item-title">المطور</div>
+                        <div class="item-desc">Saad Zaki Ibrahim</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="copyright">جميع الحقوق محفوظة لدى MedBuild3D</div>
+            <div class="year">© 2026</div>
+        </footer>
+    </div>
+
+    <!-- نافذة الدفع -->
+    <div class="payment-modal" id="payment-modal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h2 class="payment-title">الترقية للإصدار المميز</h2>
+                <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+            </div>
+            
+            <div class="payment-form">
+                <div class="form-group">
+                    <label class="form-label">اسم حامل البطاقة</label>
+                    <input type="text" class="form-input" placeholder="اسم حامل البطاقة">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">رقم البطاقة</label>
+                    <input type="text" class="form-input" placeholder="1234 5678 9012 3456">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">تاريخ الانتهاء</label>
+                        <input type="text" class="form-input" placeholder="MM/YY">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">CVV</label>
+                        <input type="text" class="form-input" placeholder="123">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">المبلغ</label>
+                    <input type="text" class="form-input" value="29.99$" readonly>
+                </div>
+                
+                <button class="pay-btn" onclick="processPayment()">دفع الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleSubscription() {
+            const choice = confirm('اختر طريقة التسجيل:\n\nموافق - التسجيل بحساب جوجل\nإلغاء - التسجيل بالبريد الإلكتروني');
+            
+            if (choice) {
+                alert('سيتم توجيهك لتسجيل الدخول بحساب جوجل');
+            } else {
+                const email = prompt('الرجاء إدخال بريدك الإلكتروني:');
+                if (email) {
+                    alert(`تم إرسال رابط التفعيل إلى: ${email}`);
+                    document.querySelector('.user-email').textContent = email;
+                    document.querySelector('.user-name').textContent = 'مستخدم جديد';
+                }
+            }
+        }
+        
+        function toggleSound() {
+            const soundToggle = document.getElementById('soundToggle');
+            const status = soundToggle.checked ? 'مفعل' : 'معطل';
+            alert(`موسيقى التطبيق ${status}`);
+        }
+        
+        function contactSupport() {
+            const phoneNumber = '+9647734054850';
+            const choice = confirm(`الدعم الفني: ${phoneNumber}\n\nاختر طريقة التواصل:\n\nموافق - اتصال هاتفي\nإلغاء - واتساب`);
+            
+            if (choice) {
+                window.open(`tel:${phoneNumber}`, '_self');
+            } else {
+                window.open(`https://wa.me/${phoneNumber.replace('+', '')}`, '_blank');
+            }
+        }
+        
+        function handleLogout() {
+            const confirmLogout = confirm('هل أنت متأكد من تسجيل الخروج؟');
+            if (confirmLogout) {
+                alert('تم تسجيل الخروج بنجاح');
+                document.querySelector('.user-email').textContent = 'غير مسجل دخول';
+                document.querySelector('.user-name').textContent = 'زائر';
+            }
+        }
+        
+        function showAbout() {
+            alert('MedBuild3D - تطبيق تفكيك الأجهزة الطبية\n\nالإصدار: 1.0\nالمطور: Saad Zaki Ibrahim\n\nتطبيق متخصص في تعليم صيانة الأجهزة الطبية');
+        }
+        
+        function openPaymentModal() {
+            document.getElementById('payment-modal').style.display = 'flex';
+        }
+        
+        function closePaymentModal() {
+            document.getElementById('payment-modal').style.display = 'none';
+        }
+        
+        function processPayment() {
+            alert('جارٍ معالجة الدفع... سيتم تفعيل الإصدار المميز بعد اكتمال العملية');
+            setTimeout(() => {
+                alert('تمت عملية الدفع بنجاح! تم تفعيل الإصدار المميز لحسابك');
+                closePaymentModal();
+            }, 2000);
+        }
+        
+        // إغلاق نافذة الدفع عند النقر خارجها
+        window.onclick = function(event) {
+            const modal = document.getElementById('payment-modal');
+            if (event.target === modal) {
+                closePaymentModal();
+            }
+        }
+    </script>
+</body>
+</html>

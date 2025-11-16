@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #4285f4;
+            --medical-blue: #1e88e5;
+            --medical-green: #43a047;
+            --medical-teal: #00acc1;
+            --dark: #2c387e;
+            --light: #f8fdff;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #e3f2fd;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .app-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+        
+        .app-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.9;
+        }
+        
+        .login-content {
+            padding: 40px 30px;
+            background: var(--light);
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        .form-input {
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--medical-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+        }
+        
+        .login-btn {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(135deg, #1565c0, #0097a7);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #cbd5e1;
+        }
+        
+        .divider-text {
+            padding: 0 15px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn.google {
+            color: #db4437;
+        }
+        
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+        
+        .social-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+        
+        .register-link a {
+            color: var(--medical-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c387e, #1a237e);
+            padding: 25px 30px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .year {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 20px;
+            }
+            
+            .login-header {
+                padding: 30px 20px;
+            }
+            
+            .app-title {
+                font-size: 2.2rem;
+            }
+            
+            .login-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <header class="login-header">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <h1 class="app-title">MedBuild3D</h1>
+            <p class="app-subtitle">تفكيك الأجهزة الطبية</p>
+        </header>
+        
+        <main class="login-content">
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <label class="form-label" for="username">اسم المستخدم</label>
+                    <input type="text" id="username" class="form-input" placeholder="أدخل اسم المستخدم" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="password">كلمة المرور</label>
+                    <input type="password" id="password" class="form-input" placeholder="أدخل كلمة المرور" required>
+                </div>
+                
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+            </form>
+            
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">أو</div>
+                <div class="divider-line"></div>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn google" onclick="loginWithGoogle()">
+                    <i class="fab fa-google"></i>
+                    تسجيل الدخول بحساب جوجل
+                </button>
+                
+                <button class="social-btn facebook" onclick="loginWithFacebook()">
+                    <i class="fab fa-facebook-f"></i>
+                    تسجيل الدخول بحساب فيسبوك
+                </button>
+            </div>
+            
+            <div class="register-link">
+                ليس لديك حساب؟ <a href="#" onclick="showRegisterForm()">إنشاء حساب جديد</a>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="copyright">جميع الحقوق محفوظة لدى MedBuild3D</div>
+            <div class="year">© 2026</div>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // محاكاة عملية تسجيل الدخول
+            if (username && password) {
+                // تخزين بيانات المستخدم في localStorage
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                
+                // الانتقال إلى الصفحة الرئيسية
+                window.location.href = 'index.html';
+            } else {
+                alert('يرجى ملء جميع الحقول');
+            }
+        });
+        
+        function loginWithGoogle() {
+            alert('جارٍ توجيهك لتسجيل الدخول بحساب جوجل...');
+            // في التطبيق الحقيقي، سيتم توجيه المستخدم إلى صفحة مصادقة جوجل
+        }
+        
+        function loginWithFacebook() {
+            alert('جارٍ توجيهك لتسجيل الدخول بحساب فيسبوك...');
+            // في التطبيق الحقيقي، سيتم توجيه المستخدم إلى صفحة مصادقة فيسبوك
+        }
+        
+        function showRegisterForm() {
+            const username = prompt('أدخل اسم المستخدم:');
+            const email = prompt('أدخل البريد الإلكتروني:');
+            const password = prompt('أدخل كلمة المرور:');
+            const phone = prompt('أدخل رقم الهاتف (اختياري):');
+            
+            if (username && email && password) {
+                // تخزين بيانات المستخدم في localStorage
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+                if (phone) {
+                    localStorage.setItem('phone', phone);
+                }
+                
+                alert('تم إنشاء الحساب بنجاح!');
+                
+                // الانتقال إلى الصفحة الرئيسية
+                window.location.href = 'index.html';
+            } else {
+                alert('يرجى ملء جميع الحقول المطلوبة');
+            }
+        }
+        
+        // التحقق مما إذا كان المستخدم مسجل الدخول بالفعل
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('userLoggedIn');
+            if (isLoggedIn === 'true') {
+                // إذا كان مسجل الدخول، توجيهه مباشرة إلى الصفحة الرئيسية
+                window.location.href = 'index.html';
+            }
+        };
+    </script>
+</body>
+</html>

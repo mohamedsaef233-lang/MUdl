@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الشرح النظري - MedBuild3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #34a853;
+            --accent: #4285f4;
+            --medical-blue: #1e88e5;
+            --medical-green: #43a047;
+            --medical-teal: #00acc1;
+            --dark: #2c387e;
+            --light: #f8fdff;
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --radius: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #e3f2fd;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--medical-blue), var(--medical-teal));
+            padding: 30px 25px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .content {
+            padding: 30px;
+            background: var(--light);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--medical-blue);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--medical-teal);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--medical-teal);
+        }
+        
+        .section-content {
+            line-height: 1.8;
+            color: #334155;
+            font-size: 1rem;
+        }
+        
+        .section-content p {
+            margin-bottom: 15px;
+        }
+        
+        .section-content ul {
+            margin-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 4px solid var(--medical-blue);
+            margin: 15px 0;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c387e, #1a237e);
+            padding: 20px 30px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .copyright {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .year {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 20px;
+            }
+            
+            .header {
+                padding: 25px 20px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <h1 class="title">الشرح النظري</h1>
+            <p class="subtitle">Water Bath - الحمام المائي</p>
+        </header>
+        
+        <main class="content">
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    مقدمة
+                </h2>
+                <div class="section-content">
+                    <p>يُستخدم حمام الماء المخبري لتسخين العينات في المختبر. تشمل بعض تطبيقاته المحافظة على خطوط الخلايا (cell lines) أو تسخين المواد الكيميائية القابلة للاشتعال التي قد تحترق إذا تعرضت للهب المكشوف.</p>
+                    <p>يتكون حمام الماء عموماً من وحدة تسخين، وحجرة من الفولاذ المقاوم للصدأ (ستانلس ستيل) تحمل الماء والعينات، وواجهة تحكم. توفر الأنواع المختلفة من حمامات الماء وظائف إضافية، مثل حمام الماء الدوراني (circulating water bath) الذي يحافظ على درجة حرارة أكثر اتساقاً، أو حمام الماء الهزاز (shaking water bath) الذي يحافظ على حركة العينات أثناء تسخينها.</p>
+                    <p>يُعد حمام الماء من المعدات المخبرية ذات درجة الحرارة الثابتة، ويوفر مصدر حرارة لمجموعة متنوعة من الأجهزة التي تحتاج إليه.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    مبدأ عمل حمام الماء
+                </h2>
+                <div class="section-content">
+                    <p>يعمل حمام الماء بوجود حساس لدرجة الحرارة (temperature sensor)، والذي ينقل درجة حرارة الماء في الجهاز إلى قيمة مقاومة، يتم تضخيمها ومقارنتها باستخدام مضخم متكامل، والذي بدوره يضع إشارات التحكم في المخرجات والمحتوى الأمثل. يحافظ هذا على طاقة تسخين أنبوب التسخين الكهربائي، وبالتالي يُبقي الحمام عند درجة حرارة ثابتة.</p>
+                    <p>يعتبر الحمام جهاز تسخين، ويُستخدم فيه الماء كوسيط لنقل الحرارة إلى مكون محلول العينة. بما أن الماء يصل إلى درجة حرارة الغليان وهي 100°C، فلا ينبغي معالجة الأواني الزجاجية أو العينات الحساسة لدرجة الحرارة باستخدام هذه الطريقة.</p>
+                    <p>يتراوح نطاق درجة الحرارة في حمام الماء بين 30°C و 100°C. للحفاظ على درجة الحرارة ثابتة، يستخدم حمام الماء الحرارة المتداولة لتوليد حركة أثناء التسخين داخل العينة. ولكن إذا كانت العينة تتطلب درجة حرارة أعلى من 100°C، يُفضل استخدام حمام الزيت أو الرمل أو السيليكون.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-cube"></i>
+                    مكونات حمام الماء الساخن
+                </h2>
+                <div class="section-content">
+                    <p>يتكون حمام الماء الساخن مما يلي:</p>
+                    <ul>
+                        <li><strong>الوعاء أو حوض الخزان (Container or Tank Bath):</strong> تُحفظ فيه عينات الاختبار في الماء الساخن لفترة طويلة من الزمن. يُصنع وعاء حمام الماء المخبري من معدن معزول مثل الفولاذ المقاوم للصدأ.</li>
+                        <li><strong>غطاء الوعاء (Container Lid):</strong> يساعد الغطاء في تغطية الوعاء، حتى لا يتبخر الماء منه. يُصنع بشكل أساسي من زجاج مقاوم للحرارة أو معدن معزول.</li>
+                        <li><strong>السخان (Heater):</strong> يحتوي حمام الماء المخبري على حساس حرارة Cu50، والذي يساعد في توليد الحرارة.</li>
+                        <li><strong>مقياس الحرارة (Thermometer):</strong> يساعد هذا في فحص درجة حرارة حمام الماء. يمكن أن يكون مدمجاً أو يوضع بشكل منفصل.</li>
+                        <li><strong>الثرموستات أو المنظم (Thermostat or regulator):</strong> يساعد الثرموستات في الحفاظ على درجة حرارة حمام الماء عند مستوى ثابت.</li>
+                        <li><strong>الجهاز المروحي أو المحرك (Propeller or stirrer device):</strong> يساعد في تدوير الماء داخل حمام الماء (يوجد في حمامات الماء الدورانية) أو يمكن استخدام الشبكة (Shelves mesh): بدلاً من الجهاز المروحي او المحرك لأن الشبكة تستخدم في الحمام المائي الهزاز و الجهاز المروحي يستخدم في الحمام المائي الدوراني وهي تساعد على رج الماء داخل الحمام المائي.</li>
+                        <li><strong>المخرج (Outlet):</strong> يساعد في إخراج الماء من الوعاء.</li>
+                        <li><strong>ضوء المؤشر (Indicator light):</strong> يجب أن تحتوي جميع حمامات الماء على ضوء مؤشر. عندما يكون الضوء مضاءً، يكون حمام الماء في وضع التسخين. إذا وصل حمام الماء إلى درجة الحرارة المطلوبة، ينطفئ الضوء للحفاظ على درجة الحرارة الثابتة.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-layer-group"></i>
+                    أنواع حمام الماء الساخن
+                </h2>
+                <div class="section-content">
+                    <p>هناك أنواع عديدة لحمام الماء الساخن وهي كما يلي:</p>
+                    <div class="highlight">
+                        <p><strong>حمام الماء الهزاز (Shaking water bath):</strong> يحتوي هذا النوع من حمام الماء على تحكم إضافي بالاهتزاز (Shaking)، والذي يساعد في حركة الماء الساخن وعينة الاختبار السائلة. يمكن تشغيل ميزة الاهتزاز هذه أو إيقاف تشغيلها. في المختبرات الميكروبيولوجية، يساعد حمام الماء الهزاز في تحضين مزرعة نامية مع دوران مناسب للهواء.</p>
+                    </div>
+                    <div class="highlight">
+                        <p><strong>حمام الماء الدوراني (Circulating water bath):</strong> يُستخدم حمام الماء ذو المحرك (Stirrers) أو الدوراني في التجارب الإنزيمية والمصلية (serologic). في حمام الماء الدوراني، يتم تدوير الماء الساخن بشكل كامل في جميع أنحاء الحوض، مما يؤدي إلى درجة حرارة أكثر انتظاماً.</p>
+                    </div>
+                    <div class="highlight">
+                        <p><strong>حمام الماء غير الدوراني (Non-circulating water bath):</strong> تعتمد حمامات الماء غير الدورانية بشكل أساسي على الحمل الحراري (convection) بدلاً من تسخين الماء بشكل منتظم، مما ينتج عنه دقة أقل من حيث التحكم في درجة الحرارة.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-tools"></i>
+                    صيانة حمام الماء
+                </h2>
+                <div class="section-content">
+                    <p>الصيانة المناسبة ضرورية لإطالة العمر الافتراضي، بغض النظر عن نوع حمام الماء الذي تستخدمه.</p>
+                    <ul>
+                        <li>أولاً: يجب مراعاة نوع الماء الذي ستستخدمه بعناية. يعمل الماء المقطر بشكل أفضل في حمامات الماء، لأن ماء الصنبور يمكن أن يحتوي على معادن تتراكم بمرور الوقت.</li>
+                        <li>ثانياً: تأكد من تصريف حمام الماء في كل مرة للحفاظ عليه في حالة جيدة.</li>
+                        <li>يحتاج هذا النوع من المعدات إلى التنظيف بانتظام. يجب التأكد من إيقاف تشغيله وإزالة الوعاء قبل التنظيف.</li>
+                        <li>امسح السدادات (seals) لإزالة أي حطام، واحرص على عدم سكب الماء في الوحدة لأن ذلك قد يتلف المكونات الكهربائية.</li>
+                        <li>لا تستخدم مواد تنظيف أكالة على حمام الماء، واستخدم فقط قطعة قماش مبللة ومنظفاً خفيفاً للتنظيف.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-flask"></i>
+                    استخدامات حمام الماء
+                </h2>
+                <div class="section-content">
+                    <p>يُستخدم حمام الماء على نطاق واسع في الأجهزة الطبية والمختبرات لتوفير درجات حرارة دقيقة وثابتة لتسخين العينات أو الحفاظ عليها. تشمل التطبيقات الشائعة ما يلي:</p>
+                    <ul>
+                        <li><strong>تحضير العينة (Sample Preparation):</strong> إذابة العينات المجمدة (Thawing frozen samples). تسخين المحاليل الكيميائية أو البيولوجية مثل البروتينات أو الأجسام المضادة. تخفيف أو إذابة المستحضرات الصيدلانية.</li>
+                        <li><strong>تشخيص الأمراض (Disease Diagnostics):</strong> يُستخدم في الاختبارات المعملية مثل تفاعل البوليميراز المتسلسل (PCR)، حيث تتطلب الإنزيمات درجات حرارة مستقرة. تحليل الدم والبلازما لعوامل التخثر.</li>
+                        <li><strong>الزراعة الميكروبية (Microbial Cultivation):</strong> الحفاظ على ظروف نمو محددة للكائنات الدقيقة. إذابة أوساط الاستنبات (مثل الأجار) قبل الاستخدام.</li>
+                        <li><strong>اختبار الجودة (Quality Testing):</strong> اختبار استقرار المنتجات الصيدلانية أو الغذائية في ظل درجات حرارة مختلفة. تقييم الآثار الحرارية على المواد الطبية.</li>
+                        <li><strong>التطبيقات الجراحية (Surgical Applications):</strong> تدفئة سوائل العمليات الجراحية، مثل المحاليل الملحية (saline solutions)، قبل إعطائها للمرضى لتجنب الصدمة الحرارية.</li>
+                        <li><strong>تطبيقات الأنسجة (Tissue Applications):</strong> تحضير الأنسجة للمعالجة في أجهزة التثبيت والتلوين في علم الأمراض.</li>
+                    </ul>
+                    <div class="highlight">
+                        <p><strong>ملاحظات:</strong> يتم اختيار درجة الحرارة الدقيقة بناءً على التطبيق، وعادة ما تتراوح بين 25°C و 100°C. تعتمد معظم الأجهزة الطبية على حمامات الماء، بسبب قدرتها على توفير تسخين موحد ومتسق دون إتلاف العينات.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="copyright">جميع الحقوق محفوظة لدى MedBuild3D</div>
+            <div class="year">© 2026</div>
+        </footer>
+    </div>
+</body>
+</html>
